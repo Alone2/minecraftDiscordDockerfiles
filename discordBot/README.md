@@ -5,3 +5,6 @@ Add Github deployment key with name 'docker' and 'docker.pub' in the folder
 
 > ssh-keygen -f ./deployKey/docker
 
+Add discord token 
+
+> printf "DISCORD_TOKEN" > ./deployKey/discordKey

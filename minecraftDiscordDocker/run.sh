@@ -36,6 +36,14 @@ do
 		echo stopped minecraft server
 		tmux kill-session -t minecraft
 	fi
+
+	now=$(date +%s)
+	for f in /www/world*.zip
+        do
+		filedate=$(date -r $f +%s)
+		[ $(expr $now - 86400) -ge $filedate ] && rm -rf "$f"
+	done
+
 	if [[ $cmd != $cmdold ]]
 	then
 		tmux send-keys -t minecraft "$cmd" ENTER

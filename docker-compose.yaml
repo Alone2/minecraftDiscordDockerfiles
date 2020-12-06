@@ -1,0 +1,47 @@
+version: '3'
+services:
+        nginx: 
+        image: nginx:latest
+        restart: always
+        container_name: production_nginx
+        volumes:
+                - ./nginx.conf:/etc/nginx/nginx.conf
+                - ./www/:/var/www/
+                - ./www/certbot:/var/www/certbot
+                - /etc/letsencrypt:/etc/letsencrypt
+        ports:
+                - 80:80
+                - 443:443
+
+        discordbot:
+                build: ./discordBot
+                restart: always
+                container_name: production_anarchybot
+                volumes:
+                        - ./www/insecure:/app/html
+                        - ./shared:/shared
+
+        minecraft_discord:
+                build: ./minecraftDiscordDocker
+                restart: always
+                container_name: minecraft_discord_docker
+                volumes:
+                        - ./www/:/www
+                        - ./shared:/shared
+                ports:
+                        - 25565:25565
+                environment:
+                        - version=1.16
+                        - eula=true
+                        - ram=400M
+
+        certbot:
+                build: ./certbot
+                restart: always
+                container_name: auto_cert_renewal
+                volumes:
+                        - /etc/letsencrypt:/etc/letsencrypt
+                        - ./www/certbot:/var/www/certbot
+                depends_on:
+                        - nginx
+

@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate" />
+		<meta http-equiv="Pragma" content="no-cache" />
+		<meta http-equiv="Expires" content="0" />
+	</head>
+	<body>
+		<div id="out">
+		</div>
+		<script>
+var xmlHttp = new XMLHttpRequest();
+xmlHttp.open( "GET", "https://bundr.net/anarchy/insecure/out.out?_=" + new Date().getTime(), false ); // false for synchronous request
+xmlHttp.send( null );
+var out = xmlHttp.responseText;
+var tnd=document.createTextNode(out);
+var div=document.getElementById("out");
+div.appendChild(tnd);
+div.innerHTML = div.innerHTML.replace(/\n/g, "<br />");
+		</script>
+
+	</body>
+</html>
+

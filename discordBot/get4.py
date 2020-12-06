@@ -1,7 +1,10 @@
 import time
 import os
 
-token = "NzE1MTA3NzM0MTE4MjAzNDIz.Xs42XQ.RIvhHTHK3G-JMxxCg7_-Iv5GY-Q"
+f = open(".discordkey", "r")
+token = f.read()
+f.close()
+
 lenght = 0
 os.system("cd AnarchyBot")
 while True:

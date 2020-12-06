@@ -6,8 +6,15 @@ COPY get4.py get.py
 COPY start.sh start.sh 
 COPY ./deployKey/docker /root/.ssh/id_rsa
 COPY ./deployKey/docker.pub /root/.ssh/id_rsa.pub
+COPY ./deployKey/discordKey /app/.discordkey
 
 RUN apt update && \
+    apt install -y apt-utils && \
+    apt install -y libffi-dev && \
+    apt install -y openssl && \
+    apt install -y libssl-dev && \
+    apt install -y libsodium-dev && \
+    apt install -y libsodium23 && \
     apt install -y python3 && \
     apt install -y python3-pip && \
     apt install -y git && \

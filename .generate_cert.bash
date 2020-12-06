@@ -22,10 +22,11 @@ for doms in "${DOMLIST[@]}"; do
 	do
 		domainsnow="$domainsnow -d $val"
 	done
-	sudo docker run -it --rm --name certbot_first_generate \
+	[ "$(uname -m)" != "armv7l" ] && sudo docker run -it --rm --name certbot_first_generate \
 		-v "/etc/letsencrypt:/etc/letsencrypt" \
 		-v "/var/lib/letsencrypt:/var/lib/letsencrypt" \
 		-v "$whereweare/www/certbot:/var/www/certbot" \
 		certbot/certbot certonly --webroot -w /var/www/certbot$domainsnow
+	[ "$(uname -m)" == "armv7l" ] && certbot certonly --webroot -w $(pwd)/www/certbot$domainsnow 
 	domainsnow=""
 done

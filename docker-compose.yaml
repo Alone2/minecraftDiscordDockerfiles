@@ -1,17 +1,17 @@
 version: '3'
 services:
         nginx: 
-        image: nginx:latest
-        restart: always
-        container_name: production_nginx
-        volumes:
-                - ./nginx.conf:/etc/nginx/nginx.conf
-                - ./www/:/var/www/
-                - ./www/certbot:/var/www/certbot
-                - /etc/letsencrypt:/etc/letsencrypt
-        ports:
-                - 80:80
-                - 443:443
+                image: nginx:latest
+                restart: always
+                container_name: production_nginx
+                volumes:
+                        - ./nginx.conf:/etc/nginx/nginx.conf
+                        - ./www/:/var/www/
+                        - ./www/certbot:/var/www/certbot
+                        - /etc/letsencrypt:/etc/letsencrypt
+                ports:
+                        - 8080:80
+                        - 8443:443
 
         discordbot:
                 build: ./discordBot
@@ -33,7 +33,7 @@ services:
                 environment:
                         - version=1.16
                         - eula=true
-                        - ram=400M
+                        - ram=2G
 
         certbot:
                 build: ./certbot

@@ -21,11 +21,14 @@ http {
 		location / {
 			root /var/www/;
 		}
+		location = /log.html {
+                        root /var/www/;
+                }
 		location = /insecure/out.out {
                         if ( $http_referer != "https://mc.bundr.net/log.html" ) {
                                 return 301 $scheme://mc.bundr.net/log.html;
                         }
-                        root /var/www/;
+                        root /var/www/insecure;
                 }
                 location /insecure {
                         return 301 $scheme://mc.bundr.net/log.html;
